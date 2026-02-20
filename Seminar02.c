@@ -7,6 +7,7 @@ struct Sablon {
 	//char* ;
 	//float ;
 	//char ;
+
 };
 struct Sablon initializare(/*parametri necesari*/) {
 	struct Sablon s;
