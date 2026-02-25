@@ -48,7 +48,7 @@ struct Telefon* copiazaPrimeleNElemente(struct Telefon* t, int nrElemente, int n
 
 void dezalocare(struct Telefon** t, int* nrElemente) {
 	//dezalocam elementele din vector si vectorul
-	for (int i = 0; i < nrElemente; i++)
+	for (int i = 0; i < *nrElemente; i++)
 	{
 		free((*t)[i].producator);
 		(*t)[i].producator = NULL;
@@ -58,10 +58,26 @@ void dezalocare(struct Telefon** t, int* nrElemente) {
 	*nrElemente = 0;
 }
 
-void copiazaAnumiteElemente(struct Telefon* vector, char nrElemente, float prag, struct Telefon** vectorNou, int* dimensiune) {
+void copiazaTelefoaneScumpe(struct Telefon* t, char nrElemente, float pretMinim, struct Telefon** vectorNou, int* dimensiune) {
 	//parametrul prag poate fi modificat in functie de 
 	// tipul atributului ales pentru a indeplini o conditie
 	//este creat un nou vector cu elementele care indeplinesc acea conditie
+	*dimensiune = 0;
+	for (int i = 0; i < nrElemente; i++) {
+		if (t[i].pret >= pretMinim)
+		{
+			(*dimensiune)++;
+		}
+	}
+	*vectorNou = malloc((*dimensiune) * sizeof(struct Telefon));
+	for (int i = 0, j=0; i < nrElemente; i++)
+	{
+		if (t[i].pret >= pretMinim)
+		{
+			(*vectorNou)[j] = copiazaTelefon(t[i]);
+			j++;
+		}
+	}
 }
 
 struct Telefon getPrimulElementConditionat(struct Telefon* vector, int nrElemente, const char* conditie) {
@@ -81,12 +97,16 @@ int main() {
 	//afisare(t);
 	int nrTelefon = 3;
 	struct Telefon* telefoane = (struct Telefon*)malloc(sizeof(struct Telefon) * nrTelefon);
-	telefoane[0] = initializare(1,8,"Samsung",2000.55,'B');
+	telefoane[0] = initializare(1,8,"Samsung",3500,'B');
 	telefoane[1] = initializare(1, 8, "Motorola", 2000.4, 'C');
 	telefoane[2] = initializare(1, 8, "Apple", 3000.4, 'D');
 	//afisareVector(telefoane, nrTelefon);
 	struct Telefon* telefoaneCopiate = copiazaPrimeleNElemente(telefoane, nrTelefon, ntTelefoaneCopiate);
-	afisareVector(telefoaneCopiate,ntTelefoaneCopiate);
-	dezalocare(&telefoane,&nrTelefon);
+	//afisareVector(telefoaneCopiate,ntTelefoaneCopiate);
+	//dezalocare(&telefoaneCopiate,&nrTelefonCopiate);
+	int dim = 0;
+	struct Telefon* vectorNou;
+	copiazaTelefoaneScumpe(&telefoane, 3, 2000.4, &vectorNou, &dim);
+	afisareVector( vectorNou, dim);
 	return 0;
 }
