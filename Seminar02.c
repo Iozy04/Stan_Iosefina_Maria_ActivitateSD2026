@@ -1,58 +1,92 @@
 #include<stdio.h>
 #include<malloc.h>
 
-struct Sablon {
+struct Telefon {
 	int id;
-	//int ;
-	//char* ;
-	//float ;
-	//char ;
-
+	int RAM;
+	char* producator;
+	float pret;
+	char serie;
 };
-struct Sablon initializare(/*parametri necesari*/) {
-	struct Sablon s;
-	s.id = 1;
-	//initializare structura 
-	return s;
+struct Telefon initializare(int id, int ram, const char* producator, float pret, char serie) {
+	struct Telefon t;
+	t.id = id;
+	t.RAM = ram;
+	t.producator = (char*)malloc(sizeof(char) * (strlen(producator) + 1));
+	strcpy_s(t.producator, strlen(producator) + 1, producator);
+	//strcpy(t.producator, producator);
+	t.pret = pret;
+	t.serie = serie;
+	return t;
+}
+struct Telefon copiazaTelefon(struct Telefon t) {
+	struct Telefon telefon = initializare(t.id, t.RAM, t.producator, t.pret, t.serie);
+	return telefon;
 }
 
-void afisare(struct Sablon s) {
-	//afisarea tuturor atributelor.
+void afisare(struct Telefon t) {
+	printf(" id %d\n ram %d\n producator %s\n pret %5.2f\n serie %c\n\n", t.id, t.RAM, t.producator, t.pret,t.serie);
 }
 
-void afisareVector(struct Sablon* vector, int nrElemente) {
-	//afisarea elementelor din vector apeland functia afisare
+void afisareVector(struct Telefon* t, int nrElemente) {
+	for (int i = 0; i < nrElemente; i++)
+		afisare(t[i]);
+
 }
 
-struct Sablon* copiazaPrimeleNElemente(struct Sablon* vector, int nrElemente, int nrElementeCopiate) {
+struct Telefon* copiazaPrimeleNElemente(struct Telefon* t, int nrElemente, int nrElementeCopiate) {
 	//copiem intr-un vector nou pe care il vom returna primele nrElementeCopiate
-	struct Sablon *vectorNou=NULL;
-
-	return vectorNou;
+	if(nrElementeCopiate<=nrElemente)
+	{
+		struct Telefon* vectorNou = (struct Telefon*)malloc(sizeof(struct Telefon) * nrElementeCopiate);
+		for (int i = 0; i < nrElementeCopiate; i++) {
+			vectorNou[i] = copiazaTelefon(t[i]);
+		}
+		return vectorNou;
+	}
 }
 
-void dezalocare(struct Sablon** vector, int* nrElemente) {
+void dezalocare(struct Telefon** t, int* nrElemente) {
 	//dezalocam elementele din vector si vectorul
+	for (int i = 0; i < nrElemente; i++)
+	{
+		free((*t)[i].producator);
+		(*t)[i].producator = NULL;
+	}
+	free(*t);
+	*t = NULL;
+	*nrElemente = 0;
 }
 
-void copiazaAnumiteElemente(struct Sablon* vector, char nrElemente, float prag, struct Sablon** vectorNou, int* dimensiune) {
+void copiazaAnumiteElemente(struct Telefon* vector, char nrElemente, float prag, struct Telefon** vectorNou, int* dimensiune) {
 	//parametrul prag poate fi modificat in functie de 
 	// tipul atributului ales pentru a indeplini o conditie
 	//este creat un nou vector cu elementele care indeplinesc acea conditie
 }
 
-struct Sablon getPrimulElementConditionat(struct Sablon* vector, int nrElemente, const char* conditie) {
+struct Telefon getPrimulElementConditionat(struct Telefon* vector, int nrElemente, const char* conditie) {
 	//trebuie cautat elementul care indeplineste o conditie
 	//dupa atributul de tip char*. Acesta este returnat.
-	struct Sablon s;
-	s.id = 1;
+	struct Telefon t;
+	t.id = 1;
 
-	return s;
+	return t;
 }
-	
 
 
 int main() {
-
+	struct Telefon t;
+	int ntTelefoaneCopiate = 2;
+	t = initializare(1, 256, "Samsung", 2000.5, 'A');
+	//afisare(t);
+	int nrTelefon = 3;
+	struct Telefon* telefoane = (struct Telefon*)malloc(sizeof(struct Telefon) * nrTelefon);
+	telefoane[0] = initializare(1,8,"Samsung",2000.55,'B');
+	telefoane[1] = initializare(1, 8, "Motorola", 2000.4, 'C');
+	telefoane[2] = initializare(1, 8, "Apple", 3000.4, 'D');
+	//afisareVector(telefoane, nrTelefon);
+	struct Telefon* telefoaneCopiate = copiazaPrimeleNElemente(telefoane, nrTelefon, ntTelefoaneCopiate);
+	afisareVector(telefoaneCopiate,ntTelefoaneCopiate);
+	dezalocare(&telefoane,&nrTelefon);
 	return 0;
 }
