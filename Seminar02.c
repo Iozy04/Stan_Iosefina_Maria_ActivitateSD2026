@@ -1,6 +1,7 @@
 //#include<stdio.h>
 //#include<malloc.h>
 //
+// 
 //struct Telefon {
 //	int id;
 //	int RAM;
