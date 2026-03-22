@@ -9,6 +9,7 @@
 //	char initiala;
 //};
 //
+// 
 //struct Student initializare(int id, int grupa, char* nume, float medie, char initiala) {
 //	struct Student s;
 //	s.id = id;
