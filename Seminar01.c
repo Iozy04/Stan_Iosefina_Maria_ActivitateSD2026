@@ -1,70 +1,70 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-struct Student {
-	int id;
-	int grupa;
-	char* nume;
-	float medie;
-	char initiala;
-};
-
-struct Student initializare(int id, int grupa, char* nume, float medie, char initiala) {
-	struct Student s;
-	s.id = id;
-	s.grupa = grupa;
-	s.nume = (char*)malloc(sizeof(char) * (strlen(nume) + 1));
-	strcpy(s.nume, nume);
-	s.medie = medie;
-	s.initiala = initiala;
-	return s;
-}
-
-void afisare(struct Student s) {
-	printf("%d. %s(%c) din grupa %d are media %5.2f\n", s.id, s.nume, s.initiala, s.grupa, s.medie);
-}
-
-void modifica_Nume(struct Student* s, char* noulNume) {
-	if (strlen(noulNume) > 2) {
-		free(s->nume);
-		(*s).nume = (char*)malloc(sizeof(char) * (strlen(noulNume) + 1));
-		strcpy(s->nume, noulNume);
-	}
-}
-
-void dezalocare(struct Student* s) {
-	free(s->nume);
-	s->nume = NULL;
-}
-
-char* comparaStudenti(struct Student student1, struct Student student2) {
-	if (student1.medie > student2.medie) {
-		return student1.nume;
-	}
-	else {
-		return student2.nume;
-	}
-}
-
-int main() {
-	struct Student s;
-	s = initializare(1, 1059, "Popescu", 8.3, 'P');
-	struct Student s2 = initializare(2, 1059, "Vasilescu Gigel", 8.1, 'V');
-	printf("s si s2 inainte de alte modificari: \n");
-	afisare(s);
-	afisare(s2);
-
-	printf("\n");
-
-	printf("s dupa modificare numelui\n");
-	modifica_Nume(&s, "Popescu Marian");
-	afisare(s);
-
-	printf("\n");
-
-	printf("Studentul cu media mai mare este: \n");
-	printf("%s", comparaStudenti(s, s2));
-	
-	dezalocare(&s);
-	return 0;
-}
+//#include <stdio.h>
+//#include <stdlib.h>
+//
+//struct Student {
+//	int id;
+//	int grupa;
+//	char* nume;
+//	float medie;
+//	char initiala;
+//};
+//
+//struct Student initializare(int id, int grupa, char* nume, float medie, char initiala) {
+//	struct Student s;
+//	s.id = id;
+//	s.grupa = grupa;
+//	s.nume = (char*)malloc(sizeof(char) * (strlen(nume) + 1));
+//	strcpy(s.nume, nume);
+//	s.medie = medie;
+//	s.initiala = initiala;
+//	return s;
+//}
+//
+//void afisare(struct Student s) {
+//	printf("%d. %s(%c) din grupa %d are media %5.2f\n", s.id, s.nume, s.initiala, s.grupa, s.medie);
+//}
+//
+//void modifica_Nume(struct Student* s, char* noulNume) {
+//	if (strlen(noulNume) > 2) {
+//		free(s->nume);
+//		(*s).nume = (char*)malloc(sizeof(char) * (strlen(noulNume) + 1));
+//		strcpy(s->nume, noulNume);
+//	}
+//}
+//
+//void dezalocare(struct Student* s) {
+//	free(s->nume);
+//	s->nume = NULL;
+//}
+//
+//char* comparaStudenti(struct Student student1, struct Student student2) {
+//	if (student1.medie > student2.medie) {
+//		return student1.nume;
+//	}
+//	else {
+//		return student2.nume;
+//	}
+//}
+//
+//int main() {
+//	struct Student s;
+//	s = initializare(1, 1059, "Popescu", 8.3, 'P');
+//	struct Student s2 = initializare(2, 1059, "Vasilescu Gigel", 8.1, 'V');
+//	printf("s si s2 inainte de alte modificari: \n");
+//	afisare(s);
+//	afisare(s2);
+//
+//	printf("\n");
+//
+//	printf("s dupa modificare numelui\n");
+//	modifica_Nume(&s, "Popescu Marian");
+//	afisare(s);
+//
+//	printf("\n");
+//
+//	printf("Studentul cu media mai mare este: \n");
+//	printf("%s", comparaStudenti(s, s2));
+//	
+//	dezalocare(&s);
+//	return 0;
+//}
