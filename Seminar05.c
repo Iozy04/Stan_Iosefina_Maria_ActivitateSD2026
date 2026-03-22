@@ -287,6 +287,7 @@
 //
 //    printf("Pret mediu: %.2f\n\n", calculeazaPretMediu(lista));
 //
+// 
 //   /* ListaDubla lista = citireLDMasiniDinFisier("masini.txt");
 //
 //    printf("=== Lista initiala ===\n");
