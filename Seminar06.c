@@ -214,6 +214,7 @@ int main() {
 
 	afisareMasina(getMasinaByID(&stiva, 7));
 
+
 	printf("COADA\n");
 	ListaD coada = citireCoadaDeMasiniDinFisier("masini.txt");
 	afisareMasina(dequeue(&coada));
