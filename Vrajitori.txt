@@ -1,0 +1,10 @@
+1,3,5200,Fulgerul,Merlin,F
+2,5,8400,Iluzoria,Ravenna,S
+3,4,9100,Glacies,Dorian,I
+4,6,13000,Umbraclaw,Seraphina,U
+5,2,3100,Flacara,Merlin,F
+6,5,7600,Tempestus,Vex,T
+7,3,4200,Glacies,Ravenna,I
+8,1,1500,Iluzoria,Dorian,S
+9,4,8800,Fulgerul,Seraphina,F
+10,6,15000,Umbraclaw,Vex,U
